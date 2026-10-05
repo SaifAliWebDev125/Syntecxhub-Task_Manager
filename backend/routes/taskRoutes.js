@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { protect } from "../middleware/auth.js";
+import { getTasks, getTask, createTask, updateTask, deleteTask } from "../controllers/taskController.js";
+
+const router = Router();
+
+router.use(protect); // every route below requires a valid access token
+
+router.route("/").get(getTasks).post(createTask);
+router.route("/:id").get(getTask).put(updateTask).delete(deleteTask);
+
+export default router;
